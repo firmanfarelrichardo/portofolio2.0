@@ -1,4 +1,4 @@
 export default function Home() {
-  const test: number = "Bukan Angka"; // ❌ Error 
+  // ✅ Kode sudah bersih
   return <h1>Sistem Portofolio Firman Ready.</h1>;
 }
