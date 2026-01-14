@@ -1,4 +1,4 @@
 export default function Home() {
-  const angka: number = "Bukan Angka"; // ❌ ERROR: String tidak boleh masuk ke Number
-  return <h1>Tes Husky</h1>;
+  const test: number = "Bukan Angka"; // ❌ Error ini harus tertangkap
+  return <h1>Sistem Portofolio Firman Ready.</h1>;
 }
