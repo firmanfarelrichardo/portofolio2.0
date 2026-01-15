@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-// --- KOMPONEN METEOR (Malam) ---
 export const Meteors = ({ number = 50 }: { number?: number }) => {
   const [meteors, setMeteors] = useState<Array<{ 
     left: string; 
@@ -14,17 +13,9 @@ export const Meteors = ({ number = 50 }: { number?: number }) => {
 
   useEffect(() => {
     const newMeteors = new Array(number).fill(true).map(() => ({
-      // POSISI HORIZONTAL (X):
-      // Tersebar sangat lebar di seluruh layar (-50% s/d 150%)
-      // Agar meteor dapat muncul dari luar layar kiri dan kanan
       left: Math.floor(Math.random() * 200 - 50) + "%", 
-      
-      // POSISI VERTIKAL (Y):
-      // Muncul dari ATAS layar (-150% s/d 0%)
-      // Agar meteor spawn dari jauh di atas layar
       top: Math.floor(Math.random() * 150 - 150) + "%", 
       
-      // DELAY & DURASI:
       animationDelay: (Math.random() * 8) + "s",
       animationDuration: Math.floor(Math.random() * 8 + 4) + "s", // 4s - 12s
     }));
@@ -38,9 +29,6 @@ export const Meteors = ({ number = 50 }: { number?: number }) => {
       {meteors.map((style, idx) => (
         <span
           key={idx}
-          // Kita HAPUS class opacity-0/dark:opacity-100 dari sini
-          // Karena kita sudah mengaturnya di CSS global (.dark .meteor-effect)
-          // Ini mencegah konflik style.
           className={cn("meteor-effect")}
           style={{
             top: style.top,
@@ -54,7 +42,6 @@ export const Meteors = ({ number = 50 }: { number?: number }) => {
   );
 };
 
-// --- KOMPONEN AWAN SVG (Siang) ---
 const CloudSVG = ({ className }: { className?: string }) => (
   <svg
     className={className}

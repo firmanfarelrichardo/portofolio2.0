@@ -5,9 +5,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* --- 2. CONFIGURASI VARIABLE --- */
 :root {
-  /* ... Warna Terang (Sama seperti sebelumnya) ... */
   --background: 43 57% 90%;
   --foreground: 80 22% 36%;
   --card: 40 33% 98%;
@@ -29,7 +27,6 @@
   --ring: 80 22% 36%;
   --radius: 0.75rem;
 
-  /* Chart colors placeholder */
   --chart-1: 12 76% 61%;
   --chart-2: 173 58% 39%;
   --chart-3: 197 37% 24%;
@@ -38,7 +35,6 @@
 }
 
 .dark {
-  /* ... Warna Gelap (Sama seperti sebelumnya) ... */
   --background: 208 72% 24%;
   --foreground: 54 91% 83%;
   --card: 209 50% 40%;
@@ -66,7 +62,6 @@
   --chart-5: 340 75% 55%;
 }
 
-/* --- 3. THEME MAPPING (Wajib untuk Tailwind v4) --- */
 @theme inline {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -99,8 +94,6 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* --- DEFINISI ANIMASI (Penting!) --- */
-  /* Syntax: nama-class: nama-keyframe durasi easing loop */
   --animate-meteor: meteor 5s linear infinite;
   --animate-cloud: cloud 60s linear infinite;
 }
@@ -115,7 +108,6 @@
 }
 
 @layer utilities {
-  /* --- EFEK HUJAN METEOR (FINAL FIX) --- */
   .meteor-effect {
     position: absolute;
     top: 50%;
@@ -125,44 +117,32 @@
     border-radius: 9999px;
     background: #ffffff;
     
-    /* Default Hidden (Siang) */
     opacity: 0;
-    
-    /* Rotasi 135deg (Jatuh dari kanan atas ke kiri bawah) */
     transform: rotate(135deg) translateX(0);
-    
-    /* Glow - Lebih terang dan besar */
     box-shadow: 0 0 4px 2px #ffffff40, 0 0 8px 4px #ffffff20;
     z-index: 10;
   }
 
-  /* Logic Animasi: Hanya jalan saat Dark Mode */
   .dark .meteor-effect {
     animation: meteor 5s linear infinite;
   }
 
-  /* Ekor Meteor */
   .meteor-effect::before {
     content: '';
     position: absolute;
     top: 50%;
     
-    /* Posisi Ekor: Di belakang kepala (Kanan = 100% dari width kepala) */
-    /* Karena meteor bergerak maju (+X), ekor harus di -X (Kiri/Belakang) */
     transform: translateY(-50%);
-    right: 0px; /* Menempel di belakang kepala */
-    width: 500px; /* Panjang ekor - lebih panjang */
+    right: 0px;
+    width: 500px;
     height: 2px;
     
-    /* Gradient: Transparan (Jauh) -> Putih (Dekat Kepala) */
     background: linear-gradient(90deg, transparent, #ffffff);
   }
 }
 
-/* --- KEYFRAMES --- */
 @keyframes meteor {
   0% {
-    /* Mulai: Opacity 1 (Muncul) */
     opacity: 1;
     transform: rotate(135deg) translateX(0);
   }
@@ -170,14 +150,11 @@
     opacity: 1;
   }
   100% {
-    /* Selesai: Opacity 0 (Hilang) & Bergerak Maju (+X) sejauh 2000px */
-    /* +X pada rotasi 135deg artinya bergerak ke kiri bawah secara diagonal */
     opacity: 0;
     transform: rotate(135deg) translateX(2000px);
   }
 }
 
-/* Keyframe Cloud (Tetap) */
 @keyframes cloud {
   0% { transform: translateX(100vw); }
   100% { transform: translateX(-150%); }
