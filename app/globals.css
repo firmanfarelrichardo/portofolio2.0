@@ -5,82 +5,68 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* --- 2. CONFIGURASI VARIABLE --- */
 :root {
-  /* --- MODE TERANG (SUNRISE EARTH) --- */
-  /* Background: #F5ECD5 (Cream Hangat) */
+  /* ... Warna Terang (Sama seperti sebelumnya) ... */
   --background: 43 57% 90%;
-  
-  /* Teks Utama: #626F47 (Hijau Hutan) - Kontras Tinggi */
   --foreground: 80 22% 36%;
-
-  /* Kartu: Putih Gading (Agar form login terlihat bersih) */
   --card: 40 33% 98%;
   --card-foreground: 80 22% 36%;
-
   --popover: 40 33% 98%;
   --popover-foreground: 80 22% 36%;
-
-  /* Primary: #626F47 (Hijau Hutan Utama) */
   --primary: 80 22% 36%;
   --primary-foreground: 43 57% 95%;
-
-  /* Secondary: #A4B465 (Zaitun Cerah) */
   --secondary: 72 33% 55%;
   --secondary-foreground: 43 57% 95%;
-
-  /* Muted: #F0BB78 (Pasir/Oranye Pudar) */
   --muted: 34 78% 85%;
-  --muted-foreground: 80 22% 45%; /* Teks abu kehijauan */
-
-  /* Accent: #F0BB78 (Oranye Matahari) - Untuk Hover */
+  --muted-foreground: 80 22% 45%;
   --accent: 34 78% 71%;
   --accent-foreground: 80 22% 36%;
-
-  /* Border: Zaitun Tipis */
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
   --border: 72 33% 70%;
   --input: 72 33% 70%;
   --ring: 80 22% 36%;
-
   --radius: 0.75rem;
+
+  /* Chart colors placeholder */
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
 }
 
 .dark {
-  /* --- MODE GELAP (STARRY NIGHT) --- */
-  /* Background: #113F67 (Biru Laut Dalam) */
+  /* ... Warna Gelap (Sama seperti sebelumnya) ... */
   --background: 208 72% 24%;
-  
-  /* Teks Utama: #FDF5AA (Kuning Bulan/Bintang) */
   --foreground: 54 91% 83%;
-
-  /* Kartu: #34699A (Biru Samudra) - Layering yang jelas */
   --card: 209 50% 40%;
   --card-foreground: 54 91% 83%;
-
   --popover: 209 50% 40%;
   --popover-foreground: 54 91% 83%;
-
-  /* Primary: #FDF5AA (Tombol Menyala seperti Bintang) */
   --primary: 54 91% 83%;
-  --primary-foreground: 208 72% 24%; /* Teks tombol gelap agar terbaca */
-
-  /* Secondary: #58A0C8 (Biru Langit Malam) */
+  --primary-foreground: 208 72% 24%;
   --secondary: 201 51% 56%;
   --secondary-foreground: 208 72% 24%;
-
-  /* Muted: Biru Gelap Pudar */
   --muted: 208 50% 30%;
   --muted-foreground: 201 30% 75%;
-
-  /* Accent: Hover state */
   --accent: 209 50% 45%;
   --accent-foreground: 54 91% 83%;
-
-  /* Border: Biru Langit Tipis */
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
   --border: 201 51% 50%;
   --input: 201 51% 50%;
   --ring: 54 91% 83%;
+  
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
 }
 
+/* --- 3. THEME MAPPING (Wajib untuk Tailwind v4) --- */
 @theme inline {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -102,24 +88,21 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
   
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
+  /* --- DEFINISI ANIMASI (Penting!) --- */
+  /* Syntax: nama-class: nama-keyframe durasi easing loop */
   --animate-meteor: meteor 5s linear infinite;
   --animate-cloud: cloud 60s linear infinite;
-
-  @keyframes meteor {
-    0% { transform: rotate(215deg) translateX(0); opacity: 1; }
-    70% { opacity: 1; }
-    100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
-  }
-
-  @keyframes cloud {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-  }
 }
 
 @layer base {
@@ -129,4 +112,73 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer utilities {
+  /* --- EFEK HUJAN METEOR (FINAL FIX) --- */
+  .meteor-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 2px;
+    width: 2px;
+    border-radius: 9999px;
+    background: #ffffff;
+    
+    /* Default Hidden (Siang) */
+    opacity: 0;
+    
+    /* Rotasi 215deg (Arah Barat Daya / SW) */
+    transform: rotate(215deg) translateX(0);
+    
+    /* Glow */
+    box-shadow: 0 0 0 1px #ffffff10;
+    z-index: 10;
+  }
+
+  /* Logic Animasi: Hanya jalan saat Dark Mode */
+  .dark .meteor-effect {
+    animation: meteor 5s linear infinite;
+  }
+
+  /* Ekor Meteor */
+  .meteor-effect::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    
+    /* Posisi Ekor: Di belakang kepala (Kanan = 100% dari width kepala) */
+    /* Karena meteor bergerak maju (+X), ekor harus di -X (Kiri/Belakang) */
+    transform: translateY(-50%);
+    right: 0px; /* Menempel di belakang kepala */
+    width: 300px; /* Panjang ekor */
+    height: 1px;
+    
+    /* Gradient: Transparan (Jauh) -> Putih (Dekat Kepala) */
+    background: linear-gradient(90deg, transparent, #ffffff);
+  }
+}
+
+/* --- KEYFRAMES --- */
+@keyframes meteor {
+  0% {
+    /* Mulai: Opacity 1 (Muncul) */
+    opacity: 1;
+    transform: rotate(215deg) translateX(0);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    /* Selesai: Opacity 0 (Hilang) & Bergerak Maju (+X) sejauh 1500px */
+    /* +X pada rotasi 215deg artinya bergerak ke Kiri Bawah */
+    opacity: 0;
+    transform: rotate(215deg) translateX(1500px);
+  }
+}
+
+/* Keyframe Cloud (Tetap) */
+@keyframes cloud {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-150%); }
 }

@@ -17,9 +17,10 @@ export default function LoginPage() {
         {/* 2. Animated Elements (Animasi Bergerak) */}
         {/* Animasi Siang: Awan */}
         <Clouds />
-        {/* Animasi Malam: Meteor (Muncul di bagian atas) */}
-        <div className="absolute h-full w-full top-[-20%] overflow-hidden">
-            <Meteors number={15} />
+        {/* Animasi Malam: Meteor */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none">
+            {/* Panggil tanpa properti tambahan karena sudah default */}
+            <Meteors /> 
         </div>
 
         {/* 3. Lighting Effects (Pencahayaan Blur) */}
