@@ -22,7 +22,7 @@ export const users = pgTable("user", {
   image: text("image"),
   
   password: text("password"), // Nullable: Karena user Google tidak punya password
-  role: text("role").$type<"admin" | "user">().default("user"),
+  role: text("role").$type<"admin" | "user">().default("user").notNull(),
   bio: text("bio"),
   
   createdAt: timestamp("created_at").defaultNow(),
