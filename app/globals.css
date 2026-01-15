@@ -120,19 +120,19 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 2px;
-    width: 2px;
+    height: 3px;
+    width: 3px;
     border-radius: 9999px;
     background: #ffffff;
     
     /* Default Hidden (Siang) */
     opacity: 0;
     
-    /* Rotasi 215deg (Arah Barat Daya / SW) */
-    transform: rotate(215deg) translateX(0);
+    /* Rotasi 135deg (Jatuh dari kanan atas ke kiri bawah) */
+    transform: rotate(135deg) translateX(0);
     
-    /* Glow */
-    box-shadow: 0 0 0 1px #ffffff10;
+    /* Glow - Lebih terang dan besar */
+    box-shadow: 0 0 4px 2px #ffffff40, 0 0 8px 4px #ffffff20;
     z-index: 10;
   }
 
@@ -151,8 +151,8 @@
     /* Karena meteor bergerak maju (+X), ekor harus di -X (Kiri/Belakang) */
     transform: translateY(-50%);
     right: 0px; /* Menempel di belakang kepala */
-    width: 300px; /* Panjang ekor */
-    height: 1px;
+    width: 500px; /* Panjang ekor - lebih panjang */
+    height: 2px;
     
     /* Gradient: Transparan (Jauh) -> Putih (Dekat Kepala) */
     background: linear-gradient(90deg, transparent, #ffffff);
@@ -164,16 +164,16 @@
   0% {
     /* Mulai: Opacity 1 (Muncul) */
     opacity: 1;
-    transform: rotate(215deg) translateX(0);
+    transform: rotate(135deg) translateX(0);
   }
   70% {
     opacity: 1;
   }
   100% {
-    /* Selesai: Opacity 0 (Hilang) & Bergerak Maju (+X) sejauh 1500px */
-    /* +X pada rotasi 215deg artinya bergerak ke Kiri Bawah */
+    /* Selesai: Opacity 0 (Hilang) & Bergerak Maju (+X) sejauh 2000px */
+    /* +X pada rotasi 135deg artinya bergerak ke kiri bawah secara diagonal */
     opacity: 0;
-    transform: rotate(215deg) translateX(1500px);
+    transform: rotate(135deg) translateX(2000px);
   }
 }
 

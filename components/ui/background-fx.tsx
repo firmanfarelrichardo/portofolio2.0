@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 // --- KOMPONEN METEOR (Malam) ---
-export const Meteors = ({ number = 20 }: { number?: number }) => {
+export const Meteors = ({ number = 50 }: { number?: number }) => {
   const [meteors, setMeteors] = useState<Array<{ 
     left: string; 
     top: string;
@@ -15,18 +15,18 @@ export const Meteors = ({ number = 20 }: { number?: number }) => {
   useEffect(() => {
     const newMeteors = new Array(number).fill(true).map(() => ({
       // POSISI HORIZONTAL (X):
-      // Muncul dari tengah sampai jauh di kanan layar (-20% s/d 120%)
-      // Agar variasi jatuhnya lebar.
-      left: Math.floor(Math.random() * 140 - 20) + "%", 
+      // Tersebar sangat lebar di seluruh layar (-50% s/d 150%)
+      // Agar meteor dapat muncul dari luar layar kiri dan kanan
+      left: Math.floor(Math.random() * 200 - 50) + "%", 
       
       // POSISI VERTIKAL (Y):
-      // Muncul dari ATAS layar (-50% s/d 10%)
-      // Agar meteor terlihat "turun" masuk ke layar.
-      top: Math.floor(Math.random() * 60 - 50) + "%", 
+      // Muncul dari ATAS layar (-150% s/d 0%)
+      // Agar meteor spawn dari jauh di atas layar
+      top: Math.floor(Math.random() * 150 - 150) + "%", 
       
       // DELAY & DURASI:
-      animationDelay: (Math.random() * 5) + "s",
-      animationDuration: Math.floor(Math.random() * 6 + 3) + "s", // 3s - 9s
+      animationDelay: (Math.random() * 8) + "s",
+      animationDuration: Math.floor(Math.random() * 8 + 4) + "s", // 4s - 12s
     }));
     
     // eslint-disable-next-line react-hooks/set-state-in-effect
