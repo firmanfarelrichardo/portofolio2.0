@@ -20,7 +20,7 @@ async function main() {
 
   // 2. Buat User Admin
   // Schema baru menggunakan 'image' bukan 'avatarUrl'
-  const hashedPassword = await hash("admin", 10); 
+  const hashedPassword = await hash("admin123", 10); 
   
   const [adminUser] = await db.insert(users).values({
     name: "Firman Farel",
