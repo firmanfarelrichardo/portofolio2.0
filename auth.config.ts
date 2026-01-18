@@ -1,10 +1,12 @@
 import type { NextAuthConfig } from "next-auth"
+import { signOut } from "@/auth";
 
 // Middleware
 export const authConfig = {
   pages: {
     signIn: "/login", 
   },
+
   
   // Logika untuk menentukan siapa yang boleh masuk
   callbacks: {
@@ -39,3 +41,9 @@ export const authConfig = {
   },
   providers: [], // Kita isi kosong dulu, diisi di auth.ts
 } satisfies NextAuthConfig
+
+export async function handleSignOut() {
+  "use server";
+  await signOut();
+  window.location.href = "/login"; 
+}
